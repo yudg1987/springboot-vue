@@ -5,6 +5,7 @@ import AddBook from '../components/AddBook'
 import Page3 from '../components/Page3'
 import Page4 from '../components/Page4'
 import Index from '../components/Index'
+import UpdateBook from '../components/UpdateBook'
 
 Vue.use(Router)
 
@@ -15,6 +16,7 @@ export default new Router({
       component: Index,
       name: '书籍管理',
       redirect: 'book',
+      show: true,
       children: [
         {
           path: '/book',
@@ -29,21 +31,10 @@ export default new Router({
       ]
     },
     {
-      path: '/',
-      component: Index,
-      name: '导航2',
-      children: [
-        {
-          path: '/page3',
-          name: '页面3',
-          component: Page3
-        },
-        {
-          path: '/page4',
-          name: '页面4',
-          component: Page4
-        }
-      ]
+      path: '/updateBook',
+      component: UpdateBook,
+      show: false,
+      name: '更新书籍'
     }
   ]
 })
