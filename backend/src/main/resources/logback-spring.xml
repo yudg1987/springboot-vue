@@ -22,10 +22,10 @@
             <level>DEBUG</level>
         </filter>
 
-        <file>../logs/eds-scs-server.log</file>
+        <file>../logs/excise.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>../logs/eds-scs-server-%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <fileNamePattern>../logs/excise-%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
             <maxFileSize>100MB</maxFileSize>
             <maxHistory>90</maxHistory>
             <totalSizeCap>10GB</totalSizeCap>
