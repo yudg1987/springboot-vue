@@ -12,7 +12,7 @@
         </el-submenu>
       </el-menu>
     </el-aside>
-    <el-main>
+    <el-main style="height: 100%;width: 100%;border: 1px solid #eee">
       <el-header style="text-align: right; font-size: 12px">
         <el-dropdown>
           <i class="el-icon-setting" style="margin-right: 15px"></i>

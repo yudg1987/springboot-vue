@@ -1,5 +1,5 @@
 <template>
-  <div class="block">
+  <div class="block" style="width: 100%;height: 100%">
     <el-table
       :data="books"
       border
@@ -44,10 +44,11 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios"
+import {getBooksByPage1, rulesResource} from "@/axios";
 
 export default {
-  name: 'Book',
+  name: "Book",
   data () {
     return {
       books: [],
@@ -63,26 +64,26 @@ export default {
     handleClick (row) {
       console.log(row)
       this.$router.replace({
-        path: '/updateBook',
+        path: "/updateBook",
         query: {
           id: row.id
         }
       })
     },
     deleteRow (row) {
-      console.log('删除记录:' + row.id)
-      axios.delete('http://localhost:8001/book/delete/' + row.id).then(resp => {
+      console.log("删除记录:" + row.id)
+      axios.delete("http://localhost:8001/book/delete/" + row.id).then(resp => {
         console.log(resp)
-        this.$message.success('删除记录成功')
+        this.$message.success("删除记录成功")
         // 动态刷新页面
         window.location.reload()
       }).catch(error => {
-        this.$message.error('删除失败')
+        this.$message.error("删除失败")
       })
     },
     page (currentPpage) {
       this.currentPage = currentPpage
-      console.log('currentPpage:' + currentPpage)
+      console.log("currentPpage:" + currentPpage)
       this.doQuery()
     },
     handleSizeChange (val) {
@@ -96,10 +97,13 @@ export default {
       this.doQuery()
     },
     doQuery () {
-      axios.get('http://localhost:8001/book/getBooks/' + this.currentPage + '/' + this.currentPageSize).then(resp => {
+      axios.get("http://localhost:8001/book/getBooks/" + this.currentPage + "/" + this.currentPageSize).then(resp => {
         console.log(resp)
-        this.books = resp.data.list
+        this.books = resp.data.records
         this.total = resp.data.total
+      }).catch(err => {
+        this.$message.error(err.message)
+        console.log(err)
       })
     }
   }

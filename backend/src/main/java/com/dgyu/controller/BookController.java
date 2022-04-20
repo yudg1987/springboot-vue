@@ -25,15 +25,14 @@ public class BookController {
 
 	@GetMapping("/getBooks/{page}/{size}")
 	@ApiOperation("分页查询书籍")
-	public List<Book> getBooks(@PathVariable("page") int page, @PathVariable("size") int size) {
+	public IPage<Book> getBooks(@PathVariable("page") int page, @PathVariable("size") int size) {
 		log.debug("getBooks start ,page:{},size:{}", page, size);
 		// PageHelper.startPage(page, size);
 		IPage<Book> bookPage = new Page<>(page, size);// 参数一是当前页，参数二是每页个数
 		bookPage = bookDao.selectPage(bookPage, null);
-		List<Book> list = bookPage.getRecords();
 		// List<Book> books = bookDao.findBooks();
 		// PageInfo pageInfo = new PageInfo(books);
-		return list;
+		return bookPage;
 	}
 
 	@ApiOperation("添加书籍")
