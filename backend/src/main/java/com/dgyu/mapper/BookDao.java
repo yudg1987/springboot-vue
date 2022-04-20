@@ -10,8 +10,11 @@ import java.util.List;
 
 //public interface BookDao extends BaseMapper<Book> {
 public interface BookDao extends BaseMapper<Book> {
-	@Select("select * from book")
-	@ResultMap("BaseResultMap")
+	/*
+	 * @Select("select * from book")
+	 * 
+	 * @ResultMap("BaseResultMap")
+	 */
 	List<Book> findBooks();
 
 }

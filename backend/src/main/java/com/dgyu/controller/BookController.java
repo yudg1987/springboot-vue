@@ -1,9 +1,9 @@
 package com.dgyu.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dgyu.entity.Book;
 import com.dgyu.mapper.BookDao;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,12 +25,15 @@ public class BookController {
 
 	@GetMapping("/getBooks/{page}/{size}")
 	@ApiOperation("分页查询书籍")
-	public PageInfo<List<Book>> getBooks(@PathVariable("page") int page, @PathVariable("size") int size) {
+	public List<Book> getBooks(@PathVariable("page") int page, @PathVariable("size") int size) {
 		log.debug("getBooks start ,page:{},size:{}", page, size);
-		PageHelper.startPage(page, size);
-		List<Book> books = bookDao.findBooks();
-		PageInfo pageInfo = new PageInfo(books);
-		return pageInfo;
+		// PageHelper.startPage(page, size);
+		IPage<Book> bookPage = new Page<>(page, size);// 参数一是当前页，参数二是每页个数
+		bookPage = bookDao.selectPage(bookPage, null);
+		List<Book> list = bookPage.getRecords();
+		// List<Book> books = bookDao.findBooks();
+		// PageInfo pageInfo = new PageInfo(books);
+		return list;
 	}
 
 	@ApiOperation("添加书籍")
